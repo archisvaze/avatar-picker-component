@@ -1,13 +1,15 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { save } from "../slices/mySlice"
-function App(props){
+import { save, handleClick } from "../slices/mySlice"
+import Avatar from './Avatar';
+import Picker from './Picker';
+function App(props) {
 
-const dispatch = useDispatch();
-const state = useSelector(state => state.myState)
+    const dispatch = useDispatch();
+    const state = useSelector(state => state.myState)
 
-    return(
-        <div className="main">
-            <h1>Hi</h1>
+    return (
+        <div onClick={(e) => dispatch(handleClick(e.target.className + ""))} className="main">
+            <Avatar currAvatar={state.currAvatar} />
         </div>
     )
 }
