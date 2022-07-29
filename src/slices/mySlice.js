@@ -8,7 +8,10 @@ initialState = {
         { "src": "images/avatar4.png", "label": "Avatar 4", "id": 4 },
         { "src": "images/avatar5.png", "label": "Avatar 5", "id": 5 },
         { "src": "images/avatar6.png", "label": "Avatar 6", "id": 6 }
-    ], currAvatar: { "src": "images/avatar1.png", "label": "Avatar 1", "id": 1 }, visible: false,
+    ],
+    currAvatar: { "src": "images/avatar1.png", "label": "Avatar 1", "id": 1 },
+    visible: false,
+    loading: [false, -1],
 };
 
 const mySlice = createSlice({
@@ -19,26 +22,33 @@ const mySlice = createSlice({
             state.saved = action.payload;
         },
         handleClick: (state, action) => {
-            let className = "avatar-img";
-            if (action.payload === className) {
+            if (action.payload === "avatar-img" || action.payload === "picker-avatar-img") {
                 state.visible = true;
             }
             else {
-                state.visible = false;
+                state.visible = [false, -1];
             }
         },
         switchAvatar: (state, action) => {
             for (let obj of state.avatars) {
                 if (obj.id === action.payload) {
                     state.currAvatar = obj;
+                    state.visible = false;
+                    state.loading = false;
+                }
+            }
+        },
+        setLoading: (state, action) => {
+            for (let obj of state.avatars) {
+                if (obj.id === action.payload) {
+                    state.loading = [true, obj.id];
                 }
             }
         }
-
     }
 
 })
 
 
-export const { save, handleClick,switchAvatar } = mySlice.actions;
+export const { save, handleClick, switchAvatar, setLoading } = mySlice.actions;
 export default mySlice.reducer;

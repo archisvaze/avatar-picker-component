@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { switchAvatar } from '../slices/mySlice';
+import { switchAvatar, setLoading } from '../slices/mySlice';
 
 export default function Picker(props) {
 
@@ -13,7 +13,17 @@ export default function Picker(props) {
             <div className="picker-triangle"></div>
             {state.avatars.map(obj => {
                 return (
-                    <div onClick={() => dispatch(switchAvatar(obj.id))} key={obj.id} className="picker-avatar">
+                    <div onClick={(e) => {
+                        dispatch(setLoading(obj.id))
+                        setTimeout(() => {
+                            dispatch(switchAvatar(obj.id));
+                        }, 2000)
+
+                    }
+                    } key={obj.id} className="picker-avatar">
+                        <div style={{
+                            display: state.loading[0] === true ? state.loading[1] === obj.id ? "flex" : "none" : "none"
+                        }} className="loading"></div>
                         <img src={obj.src} alt="" className="picker-avatar-img" />
                     </div>
                 )
