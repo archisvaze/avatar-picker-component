@@ -69,7 +69,6 @@
 }
 .picker-avatar-img:hover {
     transform: scale(1.07);
-   filter: grayscale(50%);
 }
 
 .picker-avatar {
