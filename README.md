@@ -1,5 +1,7 @@
 # Avatar Picker Component
 
+Link: https://capable-paletas-efd6c6.netlify.app/
+
 ![](demo.gif)
 
 This is going to be a react component which is being passed just one property: the list of available `avatars`. This list contains the src of the image file, the avatar label and a unique avatar id. The number of avatars can vary (let's say up to 12). For this example please use the following array:
